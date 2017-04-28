@@ -1,3 +1,4 @@
+%Make FB2
 fb2 = zeros(ndof);
 
 %Hitta ränders index:

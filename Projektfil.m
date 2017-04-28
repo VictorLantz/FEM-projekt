@@ -7,7 +7,7 @@ c = [csol cpcb csmd];
 ro = [rsol rpcb rosmd];
 
 
-%Plocka ut mög ur mesh
+%Plocka ut mög ur mesh1
 nelm=length(triangle(1,:)) ;
 edof(:,1)=1:nelm  ;
 edof(:,2:4)=triangle(1:3,:)' ;
@@ -43,7 +43,6 @@ for i = 0:100
 clf;
 ed = extract(edof, T);
 edtot = [ed ; ed];
-
 fill(extot', eytot', edtot');
 colorbar;
 timestep;
