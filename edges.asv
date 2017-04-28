@@ -1,0 +1,15 @@
+%Hitta ränders index:
+
+%Hitta index för Lsmdv
+i = 1;
+xkrav1 = point(1, edges(1, i)) > 0.61 * 10^-3 && point(1, edges(1, i)) < 1.0 * 10^-3;
+ykrav1 = point(2, edges(1, i)) > 0.2 * 10^-3 && point(2, edges(1, i)) < 0.6 * 10^-3;
+
+while ~((xkrav1 && ykrav1) 
+    i = i + 1;
+end
+indexLsmdv = edge(5, i);
+
+Lsmdv = find(edge(5, :) == indexLsmdv);
+Lsmdh = find(edge(5, :) == indexLsmdh);
+Lsol = find(edge(5, :) == indexLsol);

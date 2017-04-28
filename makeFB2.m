@@ -2,11 +2,11 @@
 fb2 = zeros(ndof);
 
 %Hitta ränders index:
-indexL3h = find(edge(5, :) == 3 & edge(4, :) < 2/3);
-indexL4 = find(edge(5, :) == 4);
+Lsmdh = find(edge(5, :) == 3 & edge(4, :) < 2/3);
+Lsol = find(edge(5, :) == 4);
 
 %Hitta integral L3h
-for i = indexL3h(1) : indexL3h(end)
+for i = Lsmdh(1) : Lsmdh(end)
    
     node1 = edge(1, i); node2 = edge(2, i);
     l = sqrt( (point(1, node1)-point(1, node2))^2 + (point(2, node1)-point(2, node2))^2);
@@ -16,7 +16,7 @@ for i = indexL3h(1) : indexL3h(end)
 end
 
 %Hitta integral L4
-for i = indexL4(1) : indexL4(end)
+for i = Lsol(1) : Lsol(end)
    
     node1 = edge(1, i); node2 = edge(2, i);
     l = sqrt( (point(1, node1)-point(1, node2))^2 + (point(2, node1)-point(2, node2))^2);

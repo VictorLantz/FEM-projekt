@@ -1,1 +1,0 @@
-T = solveq((C/dt + K - 0),(C/dt*T + fb1));

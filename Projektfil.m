@@ -41,6 +41,6 @@ ed = extract(edof, T);
 edtot = [ed ; ed];
 fill(extot', eytot', edtot');
 colorbar;
-timestep;
+T = solveq((C/dt + K - fb2),(C/dt*T + fb1)); %Timestep
 waitforbuttonpress
 end

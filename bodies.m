@@ -43,7 +43,7 @@ ro(triangle(4,col)) = rpcb;
 % while ~(point(1,i) == 1*10^-3 && point(2,i) == 2*10^-4)   
 %     i = i+1;
 % end 
-i = 3;
+i = 3; %OBS FULLÖSNING FÖR INDEXERING FUNKADE INTE PGA MATLAB
 col = 1;
 while ~sum(find(triangle(1:3, col) == i & k(triangle(4, col)) == 0)) %betyder att den ännu inte blivit tilldelad värde
     col = col+1;
