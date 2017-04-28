@@ -2,9 +2,9 @@ clear; load('konstanter'); load('uglymesh');
 
 %Skapar vektorer för att lätt plocka ut konstanter till rätt kropp.
 % 1 är sol, 2 är pcb och 3 är smd.
-k = [0 ksol kpcb ksmd];
-c = [0 csol cpcb csmd];
-ro = [0 rsol rpcb rosmd];
+k = [ksol kpcb ksmd];
+c = [csol cpcb csmd];
+ro = [rsol rpcb rosmd];
 
 
 %Plocka ut mög ur mesh
@@ -33,3 +33,19 @@ makeFB1;
 
 %Skapa fB2
 makeFB2;
+
+T = ones(ndof, 1) * T0;
+dt = 0.001;
+extot = [Ex ; -Ex];
+eytot = [Ey ; Ey];
+
+for i = 0:100
+clf;
+ed = extract(edof, T);
+edtot = [ed ; ed];
+
+fill(extot', eytot', edtot');
+colorbar;
+timestep;
+waitforbuttonpress
+end
