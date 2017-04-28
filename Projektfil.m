@@ -1,10 +1,6 @@
-clear; load('konstanter'); load('uglymesh');
+clear; load('konstanter'); load('uglymesh_2');
 
-%Skapar vektorer med materialkonstanter. Mappar rätt konstant till rätt
-%kropp
-k = [ksol kpcb ksmd];
-c = [csol cpcb csmd];
-ro = [rsol rpcb rosmd];
+
 
 
 %Plockar information ur mesh
