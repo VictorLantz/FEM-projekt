@@ -1,20 +1,19 @@
 clear; load('konstanter'); load('uglymesh');
 
-%Skapar vektorer för att lätt plocka ut konstanter till rätt kropp.
-% 1 är sol, 2 är pcb och 3 är smd.
+%Skapar vektorer med materialkonstanter. Mappar rÃ¤tt konstant till rÃ¤tt
+%kropp
 k = [ksol kpcb ksmd];
 c = [csol cpcb csmd];
 ro = [rsol rpcb rosmd];
 
 
-%Plocka ut mög ur mesh1
+%Plockar information ur mesh
 nelm=length(triangle(1,:)) ;
 edof(:,1)=1:nelm  ;
 edof(:,2:4)=triangle(1:3,:)' ;
 coord=point' ;
 ndof=max(max(triangle(1:3,:))); 
 [Ex,Ey]=coordxtr(edof,coord,(1:ndof)',3);
-%eldraw2(Ex,Ey,[1,4,1]) ;
 
 K = zeros(ndof);
 C = zeros(ndof);
@@ -30,15 +29,16 @@ end
 %Skapa fB1
 makeFB1;
 
-
 %Skapa fB2
 makeFB2;
 
+%Skapar startvÃ¤rden, storlek pÃ¥ tidssteg och koordinatmatris till plot
 T = ones(ndof, 1) * T0;
 dt = 0.001;
 extot = [Ex ; -Ex];
 eytot = [Ey ; Ey];
 
+%LÃ¶ser tidsteg och plottar temperaturen.
 for i = 0:100
 clf;
 ed = extract(edof, T);
