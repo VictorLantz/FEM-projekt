@@ -1,7 +1,4 @@
-clear; load('konstanter'); load('uglymesh_2');
-
-
-
+clear; load('konstanter'); load('finemesh_2');
 
 %Plockar information ur mesh
 nelm=length(triangle(1,:)) ;
@@ -10,6 +7,10 @@ edof(:,2:4)=triangle(1:3,:)' ;
 coord=point' ;
 ndof=max(max(triangle(1:3,:))); 
 [Ex,Ey]=coordxtr(edof,coord,(1:ndof)',3);
+
+%Skapar index f�r kroppar och kanter
+bodies;
+edges;
 
 K = zeros(ndof);
 C = zeros(ndof);
@@ -31,6 +32,7 @@ makeFB2;
 %Skapar startvärden, storlek på tidssteg och koordinatmatris till plot
 T = ones(ndof, 1) * T0;
 dt = 0.001;
+t = 0;
 extot = [Ex ; -Ex];
 eytot = [Ey ; Ey];
 
@@ -41,6 +43,8 @@ ed = extract(edof, T);
 edtot = [ed ; ed];
 fill(extot', eytot', edtot');
 colorbar;
+title(['Time = ' num2str(t) 'seconds']);
 T = solveq((C/dt + K - fb2),(C/dt*T + fb1)); %Timestep
+t = t + dt;
 waitforbuttonpress
 end
