@@ -1,6 +1,6 @@
-%Hitta ränders index:
+%Hitta rï¿½nders index:
 
-%% Hitta index för Lsol
+%% Hitta index fï¿½r Lsol
 i = 1;
 xkrav1 = (point(1, edge(1, i)) > 0.61 * 10^-3) && (point(1, edge(1, i)) < 1.0 * 10^-3);
 ykrav1 = (point(2, edge(1, i)) > 0.2 * 10^-3) && (point(2, edge(1, i)) < 0.6 * 10^-3);
@@ -16,7 +16,7 @@ while ~((xkrav1 && ykrav1) || (xkrav2 && ykrav2))
 end
 indexLsol = edge(5, i);
 
-%% Hitta index för Lsmdv
+%% Hitta index fï¿½r Lsmdv
 
 i = 1;
 xkrav1 = (point(1, edge(1, i)) > 0) && (point(1, edge(1, i)) < 0.2 * 10^-3);
@@ -34,7 +34,7 @@ end
 indexLsmdv = edge(5, i);
 
 
-%% Hitta index för Lsmdh
+%% Hitta index fï¿½r Lsmdh
 
 i = 1;
 xkrav1 = (point(1, edge(1, i)) > 0.2 * 10^-3) && (point(1, edge(1, i)) < 1 * 10^-3);

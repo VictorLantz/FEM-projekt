@@ -16,8 +16,8 @@ for i = 1 : length(Lsmdh)
    
     node1 = edge(1, Lsmdh(i)); node2 = edge(2, Lsmdh(i));
     l = sqrt( (point(1, node1)-point(1, node2))^2 + (point(2, node1)-point(2, node2))^2);
-    fb1(node1) = fb1(node1) - ac * Tinf * ksmd * l / 2;
-    fb1(node2) = fb1(node2) - ac * Tinf * ksmd * l / 2;
+    fb1(node1) = fb1(node1) + ac * Tinf * ksmd * l / 2;
+    fb1(node2) = fb1(node2) + ac * Tinf * ksmd * l / 2;
     
 end
 
@@ -26,7 +26,7 @@ for i = 1: length(Lsol)
    
     node1 = edge(1, Lsol(i)); node2 = edge(2, Lsol(i));
     l = sqrt( (point(1, node1)-point(1, node2))^2 + (point(2, node1)-point(2, node2))^2);
-    fb1(node1) = fb1(node1) - ac * Tinf * ksol * l / 2;
-    fb1(node2) = fb1(node2) - ac * Tinf * ksol * l / 2;
+    fb1(node1) = fb1(node1) + ac * Tinf * ksol * l / 2;
+    fb1(node2) = fb1(node2) + ac * Tinf * ksol * l / 2;
     
 end
