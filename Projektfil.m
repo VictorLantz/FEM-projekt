@@ -1,4 +1,4 @@
-clear;  load('finemesh_2'); load('konstanter');
+clear;  load('uglymesh_2'); load('konstanter');
 
 %Plockar information ur mesh
 nelm=length(triangle(1,:)) ;
@@ -22,7 +22,6 @@ for i = 1:nelm
     Ce = plantml(Ex(i, :), Ey(i, :), ro(triangle(4,i))*c(triangle(4,i)));
     C = assem(edof(i, :), C, Ce);
 end
-
 %Skapa fB1
 makeFB1;
 
@@ -32,19 +31,19 @@ makeFB2;
 %Skapar startvärden, storlek på tidssteg och koordinatmatris till plot
 T = ones(ndof, 1) * T0;
 dt = 1;
-t = 0;
+time = 0;
 extot = [Ex ; -Ex];
 eytot = [Ey ; Ey];
 
 %Löser tidsteg och plottar temperaturen.
-for i = 0:100
+for i = 0:10
 clf;
 ed = extract(edof, T);
 edtot = [ed ; ed];
 fill(extot', eytot', edtot');
 colorbar;
-title(['Time = ' num2str(t) 'seconds']);
+title(['Time = ' num2str(time) 'seconds']);
 T = solveq((C/dt + K + fb2),(C/dt*T + fb1)); %Timestep
-t = t + dt;
+time= time + dt;
 waitforbuttonpress
 end
