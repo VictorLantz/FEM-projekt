@@ -23,12 +23,14 @@ for i = 1:nelm
 
     Ke = plante(Ex(i, :), Ey(i, :), [2, 1], D);
     
-    es = alfatemp * deltaT(i) / (1 - 2 * vtemp) * [1 1 0];
+    es = Etemp * alfatemp * deltaT(i) / (1 - 2 * vtemp) * [1 1 0];
     fe = plantf(Ex(i, :), Ey(i, :), [2, 1], es);
     
     [K, f] = assem(edof(i, :), K, Ke,f, fe);
 end
-
-bc = [bottompcb' , zeros(size(bottompcb,2),1) ; sidepcb' , zeros(size(sidepcb,2),1)];
-
+bc = [bottompcb' , zeros(size(bottompcb,2),1) ; sidepcb' , zeros(size(sidepcb,2),1) ; middle' , zeros(size(middle,2),1)];
 a = solveq(K, f, bc);
+
+ad = extract(edof, a);
+plotpar = [1, 4, 2];
+eldisp2(Ex, Ey, ad, plotpar, 1000);

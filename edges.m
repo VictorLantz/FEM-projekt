@@ -60,3 +60,4 @@ nodex = point(1,:);
 %sidepcb = find( nodex == 0.00100000000000000);
 sidepcb = find( nodex > 0.00099999999999);
 bottompcb = find(point(2,:) == 0) + ndof;
+middle = find( nodex == 0 );
