@@ -54,3 +54,9 @@ indexLsmdh = edge(5, i);
 Lsmdv = find(edge(5, :) == indexLsmdv);
 Lsmdh = find(edge(5, :) == indexLsmdh);
 Lsol = find(edge(5, :) == indexLsol);
+
+%%Hitta nodindex för PCB
+nodex = point(1,:);
+%sidepcb = find( nodex == 0.00100000000000000);
+sidepcb = find( nodex > 0.00099999999999);
+bottompcb = find(point(2,:) == 0) + ndof;
