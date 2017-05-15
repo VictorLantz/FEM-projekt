@@ -36,6 +36,7 @@ extot = [Ex ; -Ex];
 eytot = [Ey ; Ey];
 
 %Löser tidsteg och plottar temperaturen.
+Tstat = solveq((K +fb2),fb1);
 for i = 0:10
 clf;
 ed = extract(edof, T);
@@ -48,4 +49,4 @@ time= time + dt;
 waitforbuttonpress
 end
 
-Tstat = solveq((K +fb2),fb1);
+

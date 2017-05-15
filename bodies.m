@@ -6,6 +6,10 @@
 k = [0 0 0 0];
 c = [0 0 0 0];
 ro = [0 0 0 0];
+E = [0 0 0 0];
+v = [0 0 0 0];
+alfa = [0 0 0 0];
+
 
 %% Hittar SMD-kroppen:
 i = 1;
@@ -19,6 +23,9 @@ end
 k(triangle(4,col)) = ksmd;
 c(triangle(4,col)) = csmd;
 ro(triangle(4,col)) = rosmd;
+v(triangle(4,col)) = vsmd;
+alfa(triangle(4,col)) = alfasmd;
+E(triangle(4,col)) = Esmd;
 
 
 %% Hittar PCB-kroppen:
@@ -33,6 +40,9 @@ end
 k(triangle(4,col)) = kpcb;
 c(triangle(4,col)) = cpcb;
 ro(triangle(4,col)) = rpcb;
+v(triangle(4,col)) = vpcb;
+alfa(triangle(4,col)) = alfapcb;
+E(triangle(4,col)) = Epcb;
 % k = [ksol kpcb ksmd];
 % c = [csol cpcb csmd];
 % ro = [rsol rpcb rosmd];
@@ -51,6 +61,9 @@ end
 k(triangle(4,col)) = ksol;
 c(triangle(4,col)) = csol;
 ro(triangle(4,col)) = rsol;
+v(triangle(4,col)) = vsol;
+alfa(triangle(4,col)) = alfasol;
+E(triangle(4,col)) = Esol;
 % k = [ksol kpcb ksmd];
 % c = [csol cpcb csmd];
 % ro = [rsol rpcb rosmd];
@@ -60,3 +73,8 @@ ro(triangle(4,col)) = rsol;
 
 i = find(not(k));
 k(i) = ksmd;
+c(i) = csmd;
+ro(i) = rosmd;
+v(i) = vsmd;
+alfa(i) = alfasmd;
+E(i) = Esmd;
