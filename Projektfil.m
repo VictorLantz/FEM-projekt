@@ -1,4 +1,4 @@
-clear;  load('uglymesh_2'); load('konstanter');
+clear;  load('finemesh_2'); load('konstanter');
 
 %Plockar information ur mesh
 nelm=length(triangle(1,:)) ;
@@ -48,4 +48,4 @@ time= time + dt;
 waitforbuttonpress
 end
 
-
+Tstat = solveq((K +fb2),fb1);
