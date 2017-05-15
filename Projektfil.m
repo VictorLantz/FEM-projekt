@@ -47,3 +47,5 @@ T = solveq((C/dt + K + fb2),(C/dt*T + fb1)); %Timestep
 time= time + dt;
 waitforbuttonpress
 end
+
+
