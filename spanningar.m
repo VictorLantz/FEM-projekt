@@ -1,4 +1,5 @@
 
+edofold = edof;
 edof = [edof(:, 1), edof(:,2), edof(:,2)+ndof, edof(:, 3), edof(:, 3)+ndof, edof(:, 4), edof(:, 4) + ndof];
 ndof = 2 * ndof;
 
@@ -11,7 +12,7 @@ for i  = 1 : nelm
 end
 
 
-%Räkna ut K-matris:
+%Räkna ut K-matris och f-vektor:
 K = zeros(ndof);
 f = zeros(ndof, 1);
 for i = 1:nelm
@@ -28,9 +29,37 @@ for i = 1:nelm
     
     [K, f] = assem(edof(i, :), K, Ke,f, fe);
 end
+
+%Lös ut töjningar
 bc = [bottompcb' , zeros(size(bottompcb,2),1) ; sidepcb' , zeros(size(sidepcb,2),1) ; middle' , zeros(size(middle,2),1)];
 a = solveq(K, f, bc);
 
+%Rita upp förskjutningar
 ad = extract(edof, a);
 plotpar = [1, 4, 2];
 eldisp2(Ex, Ey, ad, plotpar, 1000);
+
+%Räkna ut spänningar es och töjningar ed
+vm_el = zeros(nelm, 1);
+for i = 1:nelm
+    Etemp = E(triangle(4,i));
+    vtemp = v(triangle(4,i));
+    
+    D = Etemp/((1+vtemp)*(1-2*vtemp))*[1 - vtemp, vtemp, 0 ; vtemp, 1-vtemp, 0 ; 0, 0, 1/2*(1-2*vtemp)];
+    
+    [es, et] = plants(Ex(i,:), Ey(i,:), [2,1], D, ad(i,:)); 
+    vm_el(i) = sqrt(es(1)^2 + es(2)^2 + 3 * es(3)^2 - es(1) * es(2));
+end
+
+%Plocka nod-spänningar och töjningar
+vm_node = zeros(size(point',1),1);
+for i=1:size(point',1) 
+    [c0,c1]=find(edofold(:,2:4)==i); 
+    vm_node(i,1)=sum(vm_el(c0))/size(c0,1); 
+end
+
+vm = extract(edofold, vm_node);
+vmtot = [vm ;vm];
+fill(extot', eytot', vmtot');
+
+

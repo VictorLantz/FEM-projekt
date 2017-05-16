@@ -2,9 +2,9 @@
 nelm=length(triangle(1,:)) ;
 edof(:,1)=1:nelm  ;
 edof(:,2:4)=triangle(1:3,:)' ;
-coord=point' ;
+%coord=point' ;
 ndof=max(max(triangle(1:3,:))); 
-[Ex,Ey]=coordxtr(edof,coord,(1:ndof)',3);
+[Ex,Ey]=coordxtr(edof,point',(1:ndof)',3);
 
 %Skapar index f�r kroppar och kanter
 bodies;
@@ -35,6 +35,11 @@ eytot = [Ey ; Ey];
 
 %Löser tidsteg och plottar temperaturen.
 Tstat = solveq((K +fb2),fb1);
+ed = extract(edof, Tstat);
+edtot = [ed ; ed];
+fill(extot', eytot', edtot');
+colorbar;
+
 
 % for i = 0:10
 % clf;
