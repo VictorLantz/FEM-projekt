@@ -1,7 +1,7 @@
 %Make FB1
 fb1 = zeros(ndof, 1);
 
-%Hitta integral L3v
+%Hitta integral smd vänster
 for i = 1 : length(Lsmdv)
    
     node1 = edge(1, Lsmdv(i)); node2 = edge(2, Lsmdv(i));
@@ -11,7 +11,7 @@ for i = 1 : length(Lsmdv)
     
 end
 
-%Hitta integral L3h
+%Hitta integral smd höger
 for i = 1 : length(Lsmdh)
    
     node1 = edge(1, Lsmdh(i)); node2 = edge(2, Lsmdh(i));
@@ -21,7 +21,7 @@ for i = 1 : length(Lsmdh)
     
 end
 
-%Hitta integral L4
+%Hitta integral solder
 for i = 1: length(Lsol)
    
     node1 = edge(1, Lsol(i)); node2 = edge(2, Lsol(i));

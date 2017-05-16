@@ -28,19 +28,21 @@ makeFB2;
 
 %Skapar startvärden, storlek på tidssteg och koordinatmatris till plot
 T = ones(ndof, 1) * T0;
-dt = 1;
+dt = 0.1;
 time = 0;
 extot = [Ex ; -Ex];
 eytot = [Ey ; Ey];
 
-%Löser tidsteg och plottar temperaturen.
+%L�ser station�r temperatur
 Tstat = solveq((K +fb2),fb1);
 ed = extract(edof, Tstat);
 edtot = [ed ; ed];
+figure(1);
 fill(extot', eytot', edtot');
 colorbar;
 
-
+%Löser tidsteg och plottar temperaturen.
+% figure(2);
 % for i = 0:10
 % clf;
 % ed = extract(edof, T);
