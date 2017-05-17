@@ -9,6 +9,7 @@ for i  = 1 : nelm
    node1 = triangle(1, i); node2 = triangle(2, i); node3 = triangle(3, i);
    deltaT(i) =  1/3 * sum([Tstat(node1), Tstat(node2), Tstat(node3)]);
 end
+deltaT = - (deltaT - mean(deltaT));
 
 
 %Räkna ut K-matris och f-vektor:
@@ -65,6 +66,7 @@ vm = extract(edofold, vm_node);
 vmtot = [vm ;vm];
 figure(4);
 h = fill(extot', eytot', vmtot');
+colorbar;
 if meshlines == 0
        set(h,'EdgeColor','none') 
 end

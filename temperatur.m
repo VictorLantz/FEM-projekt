@@ -29,10 +29,11 @@ makeFB2;
 
 %Skapar startvÃ¤rden, storlek pÃ¥ tidssteg och koordinatmatris till plot
 T = ones(ndof, 1) * T0;
-dt = 1;
+dt = 0.2;
 time = 0;
 extot = [Ex ; -Ex];
 eytot = [Ey ; Ey];
+deg = sprintf('%c', char(176));
 
 %Löser stationär temperatur
 Tstat = solveq((K + fb2),fb1);
@@ -57,8 +58,11 @@ if runtempstep == 1
     if meshlines == 0
        set(h,'EdgeColor','none') 
     end
+    if time == 0
+       caxis([30 34]); 
+    end
     colorbar;
-    title(['Tidsberoende Temperaturfördelning, Tid = ' num2str(time) 'sekunder']);
+    title(['Temperaturfördelning (' deg 'C), Tid = ' num2str(time) ' s']);
     xlabel('x-led, m'); ylabel('y-led, m'); 
     T = solveq((C/dt + K + fb2),(C/dt*T + fb1)); %Timestep
     time= time + dt;
