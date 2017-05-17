@@ -39,7 +39,10 @@ Tstat = solveq((K + fb2),fb1);
 ed = extract(edof, Tstat);
 edtot = [ed ; ed];
 figure(1);
-fill(extot', eytot', edtot');
+h = fill(extot', eytot', edtot');
+if meshlines == 0
+       set(h,'EdgeColor','none') 
+end
 colorbar; title('Stationär Temperaturfördelning'); xlabel('x-led, m'); ylabel('y-led, m'); 
 
 % LÃ¶ser tidsteg och plottar temperaturen.
@@ -50,7 +53,10 @@ if runtempstep == 1
     clf;
     ed = extract(edof, T);
     edtot = [ed ; ed];
-    fill(extot', eytot', edtot');
+    h = fill(extot', eytot', edtot');
+    if meshlines == 0
+       set(h,'EdgeColor','none') 
+    end
     colorbar;
     title(['Tidsberoende Temperaturfördelning, Tid = ' num2str(time) 'sekunder']);
     xlabel('x-led, m'); ylabel('y-led, m'); 

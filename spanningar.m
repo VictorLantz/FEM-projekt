@@ -63,7 +63,10 @@ end
 vm = extract(edofold, vm_node);
 vmtot = [vm ;vm];
 figure(4);
-fill(extot', eytot', vmtot');
+h = fill(extot', eytot', vmtot');
+if meshlines == 0
+       set(h,'EdgeColor','none') 
+end
 xlabel('x-led, m'); ylabel('y-led, m'); title('Von-Mise-Spänningen i Kroppen');
 
 
