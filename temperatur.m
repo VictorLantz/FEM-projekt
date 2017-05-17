@@ -40,21 +40,26 @@ ed = extract(edof, Tstat);
 edtot = [ed ; ed];
 figure(1);
 fill(extot', eytot', edtot');
-colorbar;
+colorbar; title('Stationär Temperaturfördelning'); xlabel('x-led, m'); ylabel('y-led, m'); 
 
 % LÃ¶ser tidsteg och plottar temperaturen.
-% figure(2);
-% for i = 0:10
-% clf;
-% ed = extract(edof, T);
-% edtot = [ed ; ed];
-% fill(extot', eytot', edtot');
-% colorbar;
-% title(['Time = ' num2str(time) 'seconds']);
-% T = solveq((C/dt + K + fb2),(C/dt*T + fb1)); %Timestep
-% time= time + dt;
-% waitforbuttonpress
-% end
+if runtempstep == 1
+    
+    figure(2);
+    for i = 0:10
+    clf;
+    ed = extract(edof, T);
+    edtot = [ed ; ed];
+    fill(extot', eytot', edtot');
+    colorbar;
+    title(['Tidsberoende Temperaturfördelning, Tid = ' num2str(time) 'sekunder']);
+    xlabel('x-led, m'); ylabel('y-led, m'); 
+    T = solveq((C/dt + K + fb2),(C/dt*T + fb1)); %Timestep
+    time= time + dt;
+    waitforbuttonpress
+    end
+
+end
 
 
 

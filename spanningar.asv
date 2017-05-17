@@ -20,7 +20,7 @@ for i = 1:nelm
     alfatemp = alfa(triangle(4,i));
     
     D = Etemp/((1+vtemp)*(1-2*vtemp))*[1 - vtemp, vtemp, 0 ; vtemp, 1-vtemp, 0 ; 0, 0, 1/2*(1-2*vtemp)];
-    
+
     Ke = plante(Ex(i, :), Ey(i, :), [2, 1], D);
     
     es = Etemp * alfatemp * deltaT(i) / (1 - 2 * vtemp) * [1 1 0];
@@ -46,8 +46,9 @@ for i = 1:nelm
     Etemp = E(triangle(4,i));
     vtemp = v(triangle(4,i));
     
-    D = Etemp/((1+vtemp)*(1-2*vtemp))*[1 - vtemp, vtemp, 0 ; vtemp, 1-vtemp, 0 ; 0, 0, 1/2*(1-2*vtemp)];
-    %D = Etemp/(1-vtemp^2) * [1 v 0 ; v 1 0 ; 0 0 1/2*(1-v)];
+    %VICTOR HÄR ÄR FELET VICTOR VICTOR!!
+    %D = Etemp/((1+vtemp)*(1-2*vtemp))*[1 - vtemp, vtemp, 0 ; vtemp, 1-vtemp, 0 ; 0, 0, 1/2*(1-2*vtemp)];
+    D = Etemp/((1+vtemp)*(1-2*vtemp))*[1, -vtemp, 0 ; -vtemp, 1, 0 ; 0, 0, 2(];
     
     [es, et] = plants(Ex(i,:), Ey(i,:), [2,1], D, ad(i,:)); 
     vm_el(i) = sqrt(es(1)^2 + es(2)^2 + 3 * es(3)^2 - es(1) * es(2));
