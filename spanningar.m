@@ -33,6 +33,7 @@ end
 bc = [bottompcb' , zeros(size(bottompcb,2),1) ; sidepcb' , zeros(size(sidepcb,2),1) ; middle' , zeros(size(middle,2),1)];
 a = solveq(K, f, bc);
 
+%OKEJ HÄR DYKER VÅRA FEL UPP VICTOR!! VÅRA FÖRSKJUTNINGAR ÄR KONSTIGA!!!
 %Rita upp förskjutningar
 figure(3);
 ad = extract(edof, a);
