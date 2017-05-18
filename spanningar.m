@@ -43,7 +43,7 @@ a = solveq(K, f, bc);
 figure(3);
 ad = extract(edof, a);
 plotpar = [1, 4, 2];
-xlabel('x-led, m'); ylabel('y-led, m'); title('Fï¿½rskjutningar i Kroppen');
+xlabel('x-led, m'); ylabel('y-led, m'); title('Förskjutningar i Kroppen, skala 1:1000');
 eldisp2(Ex, Ey, ad, plotpar, 1000);
 
 %Rï¿½kna ut spï¿½nningar es och tï¿½jningar ed
@@ -75,7 +75,7 @@ colorbar;
 if meshlines == 0
        set(h,'EdgeColor','none') 
 end
-xlabel('x-led, m'); ylabel('y-led, m'); title('Von-Mise-Spï¿½nningen i Kroppen');
+xlabel('x-led, m'); ylabel('y-led, m'); title('Von-Mise-Spänningar i Kroppen (N/m^2)');
 
 
 
