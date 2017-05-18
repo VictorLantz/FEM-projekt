@@ -1,6 +1,6 @@
 %Skapa ny edof med fler frihetsgrader. X-komponenterna i noderna ges samma
 %index som tidigare. Y-komponenterna ges samma index som sina noder men +
-%ndof för att inte få index-överlapp.
+%ndof fï¿½r att inte fï¿½ index-ï¿½verlapp.
 edofold = edof;
 edof = [edof(:, 1), edof(:,2), edof(:,2)+ndof, edof(:, 3), edof(:, 3)+ndof, edof(:, 4), edof(:, 4) + ndof];
 ndof = 2 * ndof;
@@ -56,7 +56,8 @@ for i = 1:nelm
     e0 = Etemp * alfatemp * deltaT(i) / (1 - 2 * vtemp) * [1 1 0];
     [es, et] = plants(Ex(i,:), Ey(i,:), [2,1], D, ad(i,:)); 
     es = es-e0;
-    vm_el(i) = sqrt(es(1)^2 + es(2)^2 + 3 * es(3)^2 - es(1) * es(2));
+    ez = Etemp * (et(1) + et(2))/((1+vtemp)*(1-2*vtemp)) - Etemp * alfatemp * deltaT(i) / (1 - 2 * vtemp);
+    vm_el(i) = sqrt(es(1)^2 + es(2)^2 + ez^2 + 3 * es(3)^2 - es(1) * es(2) - es(1) * ez - ez * es(2));
 end
 
 %Plocka nod-spï¿½nningar och tï¿½jningar
