@@ -6,12 +6,13 @@ edof = [edof(:, 1), edof(:,2), edof(:,2)+ndof, edof(:, 3), edof(:, 3)+ndof, edof
 ndof = 2 * ndof;
 
 %R�kna ut deltaT
-deltaT = zeros(nelm,1);
-for i  = 1 : nelm
-   node1 = triangle(1, i); node2 = triangle(2, i); node3 = triangle(3, i);
-   deltaT(i) =  1/3 * sum([Tstat(node1), Tstat(node2), Tstat(node3)]);
-end
-deltaT = deltaT - T0;
+% deltaT = zeros(nelm,1);
+% for i  = 1 : nelm
+%    node1 = triangle(1, i); node2 = triangle(2, i); node3 = triangle(3, i);
+%    deltaT(i) =  1/3 * sum([Tstat(node1), Tstat(node2), Tstat(node3)]);
+% end
+% deltaT = deltaT - T0;
+deltaT = (extract(edofold, Tstat) - T0);
 
 
 %R�kna ut K-matris och f-vektor:
@@ -52,7 +53,6 @@ for i = 1:nelm
     vtemp = v(triangle(4,i));
     
     D = Etemp * [1 - vtemp, vtemp, 0 ; vtemp, 1-vtemp, 0 ; 0, 0, 1/2*(1-2*vtemp)] /((1+vtemp)*(1-2*vtemp));%D = Etemp/(1-vtemp^2) * [1 v 0 ; v 1 0 ; 0 0 1/2*(1-v)];
-    %D = hooke(2, Etemp,vtemp);
     e0 = Etemp * alfatemp * deltaT(i) / (1 - 2 * vtemp) * [1 1 0];
     [es, et] = plants(Ex(i,:), Ey(i,:), [2,1], D, ad(i,:)); 
     es = es-e0;
