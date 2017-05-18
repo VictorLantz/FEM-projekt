@@ -1,4 +1,6 @@
-
+%Skapa ny edof med fler frihetsgrader. X-komponenterna i noderna ges samma
+%index som tidigare. Y-komponenterna ges samma index som sina noder men +
+%ndof för att inte få index-överlapp.
 edofold = edof;
 edof = [edof(:, 1), edof(:,2), edof(:,2)+ndof, edof(:, 3), edof(:, 3)+ndof, edof(:, 4), edof(:, 4) + ndof];
 ndof = 2 * ndof;
