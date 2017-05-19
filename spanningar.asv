@@ -43,7 +43,7 @@ a = solveq(K, f, bc);
 figure(3);
 ad = extract(edof, a);
 plotpar = [1, 4, 2];
-xlabel('x-led, m'); ylabel('y-led, m'); title('Förskjutningar i Kroppen');
+xlabel('x-led, m'); ylabel('y-led, m'); title('Förskjutningar i Kroppen, skala 1:1000');
 eldisp2(Ex, Ey, ad, plotpar, 1000);
 
 %Rï¿½kna ut spï¿½nningar es och tï¿½jningar ed
@@ -66,6 +66,10 @@ for i=1:size(point',1)
     [c0,c1]=find(edofold(:,2:4)==i); 
     vm_node(i,1)=sum(vm_el(c0))/size(c0,1); 
 end
+
+figure(5);
+ex = point(1,:); ey = point(2,:);
+contour(eq, ey, vm:
 
 vm = extract(edofold, vm_node);
 vmtot = [vm ;vm];
