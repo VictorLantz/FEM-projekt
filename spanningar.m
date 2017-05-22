@@ -2,17 +2,16 @@
 %index som tidigare. Y-komponenterna ges samma index som sina noder men +
 %ndof f�r att inte f� index-�verlapp.
 edofold = edof;
-edof = [edof(:, 1), edof(:,2), edof(:,2)+ndof, edof(:, 3), edof(:, 3)+ndof, edof(:, 4), edof(:, 4) + ndof];
+edof = [edof(:, 1), edof(:,2), edof(:,2)+ndof, edof(:, 3), edof(:,3)+ndof, edof(:, 4), edof(:, 4) + ndof];
 ndof = 2 * ndof;
 
 %R�kna ut deltaT
-% deltaT = zeros(nelm,1);
-% for i  = 1 : nelm
-%    node1 = triangle(1, i); node2 = triangle(2, i); node3 = triangle(3, i);
-%    deltaT(i) =  1/3 * sum([Tstat(node1), Tstat(node2), Tstat(node3)]);
-% end
-% deltaT = deltaT - T0;
-deltaT = (extract(edofold, Tstat) - T0);
+deltaT = zeros(nelm,1);
+for i  = 1 : nelm
+   node1 = triangle(1, i); node2 = triangle(2, i); node3 = triangle(3, i);
+   deltaT(i) =  1/3 * sum([Tstat(node1), Tstat(node2), Tstat(node3)]);
+end
+deltaT = deltaT - T0;
 
 
 %R�kna ut K-matris och f-vektor:
@@ -56,7 +55,7 @@ for i = 1:nelm
     e0 = Etemp * alfatemp * deltaT(i) / (1 - 2 * vtemp) * [1 1 0];
     [es, et] = plants(Ex(i,:), Ey(i,:), [2,1], D, ad(i,:)); 
     es = es-e0;
-    ez = Etemp * (et(1) + et(2))/((1+vtemp)*(1-2*vtemp)) - Etemp * alfatemp * deltaT(i) / (1 - 2 * vtemp);
+    ez = Etemp * vtemp * (et(1) + et(2))/((1+vtemp)*(1-2*vtemp)) - Etemp * alfatemp * deltaT(i) / (1 - 2 * vtemp);
     vm_el(i) = sqrt(es(1)^2 + es(2)^2 + ez^2 + 3 * es(3)^2 - es(1) * es(2) - es(1) * ez - ez * es(2));
 end
 
