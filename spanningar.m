@@ -1,11 +1,11 @@
-%Skapa ny edof med fler frihetsgrader. X-komponenterna i noderna ges samma
+%% Skapa ny edof med fler frihetsgrader. X-komponenterna i noderna ges samma
 %index som tidigare. Y-komponenterna ges samma index som sina noder men +
-%ndof fï¿½r att inte fï¿½ index-ï¿½verlapp.
+%ndof för att inte få index-överlapp.
 edofold = edof;
 edof = [edof(:, 1), edof(:,2), edof(:,2)+ndof, edof(:, 3), edof(:,3)+ndof, edof(:, 4), edof(:, 4) + ndof];
 ndof = 2 * ndof;
 
-%Rï¿½kna ut deltaT
+%% Räkna ut deltaT
 deltaT = zeros(nelm,1);
 for i  = 1 : nelm
    node1 = triangle(1, i); node2 = triangle(2, i); node3 = triangle(3, i);
@@ -14,7 +14,7 @@ end
 deltaT = deltaT - T0;
 
 
-%Rï¿½kna ut K-matris och f-vektor:
+%% Räkna ut K-matris och f-vektor:
 K = zeros(ndof);
 f = zeros(ndof, 1);
 for i = 1:nelm
@@ -23,29 +23,29 @@ for i = 1:nelm
     alfatemp = alfa(triangle(4,i));
     
     D = Etemp * [1 - vtemp, vtemp, 0 ; vtemp, 1-vtemp, 0 ; 0, 0, 1/2*(1-2*vtemp)] /((1+vtemp)*(1-2*vtemp));
-    %D = hooke(2, Etemp,vtemp);
     
     Ke = plante(Ex(i, :), Ey(i, :), [2, 1], D);
     
+    %Notera att e0 här är D*Epsilon_0 i rapporten. Den är kort och gott e0
+    %här för att det är snyggare att skriva.
     e0 = Etemp * alfatemp * deltaT(i) / (1 - 2 * vtemp) * [1 1 0];
     fe = plantf(Ex(i, :), Ey(i, :), [2, 1], e0);
     
     [K, f] = assem(edof(i, :), K, Ke,f, fe);
 end
 
-%Lï¿½s ut fï¿½rskjutningar
+%% Lös ut förskjutningar
 bc = [bottompcb' , zeros(size(bottompcb,2),1) ; sidepcb' , zeros(size(sidepcb,2),1) ; middle' , zeros(size(middle,2),1)];
 a = solveq(K, f, bc);
 
-%OKEJ Hï¿½R DYKER Vï¿½RA FEL UPP VICTOR!! Vï¿½RA Fï¿½RSKJUTNINGAR ï¿½R KONSTIGA!!!
-%Rita upp fï¿½rskjutningar
+%% Rita upp förskjutningar
 figure(3);
 ad = extract(edof, a);
 plotpar = [1, 4, 2];
 xlabel('x-led, m'); ylabel('y-led, m'); title('Förskjutningar i Kroppen, skala 1:1000');
 eldisp2(Ex, Ey, ad, plotpar, 1000);
 
-%Rï¿½kna ut spï¿½nningar es och tï¿½jningar ed
+%% Räkna ut spänningar es och töjningar ed
 vm_el = zeros(nelm, 1);
 for i = 1:nelm
     Etemp = E(triangle(4,i));
@@ -59,7 +59,7 @@ for i = 1:nelm
     vm_el(i) = sqrt(es(1)^2 + es(2)^2 + ez^2 + 3 * es(3)^2 - es(1) * es(2) - es(1) * ez - ez * es(2));
 end
 
-%Plocka nod-spï¿½nningar och tï¿½jningar
+%% Plocka ut nod-spänningar och töjningar
 vm_node = zeros(size(point',1),1);
 for i=1:size(point',1) 
     [c0,c1]=find(edofold(:,2:4)==i); 

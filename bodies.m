@@ -1,7 +1,7 @@
 %Tar reda på vilka kroppar som är vilka och vilka edges som är vilka i vår
 %mesh.
 
-%Skapar vektorer med materialkonstanter. Mappar rÃ¤tt konstant till rÃ¤tt
+%Skapar vektorer med materialkonstanter. Mappar rätt konstant till rätt
 %kropp
 k = [0 0 0 0];
 c = [0 0 0 0];
@@ -12,6 +12,8 @@ alfa = [0 0 0 0];
 
 
 %% Hittar SMD-kroppen:
+%Kroppen hittas genom att plocka ut noder på specifika platser (hörnen) och
+%kolla vilket kroppsindex som de element kopplade till noden har.
 i = 1;
 while ~(point(1,i) == 0 && point(2,i) == 6*10^-4)   
     i = i+1;
@@ -70,6 +72,8 @@ E(triangle(4,col)) = Esol;
 
 
 %% Sätter in värdet för "den andra" SMD-kroppen.
+%Ingen större sökning behöver ske eftersom det måste vara det enda
+%kroppsindex som ännu inte blivit tilldelat ett värde.
 
 i = find(not(k));
 k(i) = ksmd;
